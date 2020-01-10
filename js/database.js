@@ -26,3 +26,5 @@ function getAllItems() {
         console.log("-----------------------------------");
     });
 }
+
+module.exports.getAllItems = getAllItems;
