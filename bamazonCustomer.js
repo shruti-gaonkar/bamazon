@@ -1,24 +1,11 @@
-
 var inquirer = require("inquirer");
 var connection = require("./js/config.js");
+var Database = require("./js/database");
 
+var database = new Database();
 
-connection.connect(function (err) {
-    if (err) throw err;
-    console.log("connected as id " + connection.threadId);
-    getAllItems();
-});
-
-
-function getAllItems() {
-    connection.query("SELECT * FROM products", function (err, res) {
-        if (err) throw err;
-        console.log("Item Id | Product Name | Price");
-        for (var i = 0; i < res.length; i++) {
-            console.log(res[i].item_id + " | " + res[i].product_name + " | " + res[i].price);
-        }
-        console.log("-----------------------------------");
-
+if (database.connect()) {
+    if (getAllItems()) {
         inquirer.prompt([
             {
                 type: "input",
@@ -39,7 +26,7 @@ function getAllItems() {
         ]).then(function (answers) {
             getItem(answers)
         });
-    });
+    }
 }
 
 function getItem(answers) {
