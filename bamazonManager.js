@@ -17,27 +17,30 @@ inquirer.prompt([
     } else if (answers.options == "View Low Inventory") {
         database.getLowInventory();
     } else if (answers.options == "Add to Inventory") {
-        let itemsArr = database.getAllItems(true);
-        //let productNameArr = [];
-        console.log(itemsArr);
-        if (itemsArr.length > 0) {
-            console.log("Items" + itemsArr);
-        }
-
-        /*for (var i = 0; i < itemsArr.length; i++) {
-            productNameArr.push(itemsArr[i].product_name);
-        }*/
-        /*inquirer.prompt([
-            {
-                type: "list",
-                name: "options",
-                message: "Please select a product",
-                choices: productNameArr
+        database.getAllItems(true, function (itemsArr) {
+            let productNameArr = [];
+            if (itemsArr.length > 0) {
+                for (var i = 0; i < itemsArr.length; i++) {
+                    productNameArr.push(itemsArr[i].product_name);
+                }
             }
-        ]).then(function (answers) {
-            database.addToInventory();
-        });*/
-
+            inquirer.prompt([
+                {
+                    type: "list",
+                    name: "product_name",
+                    message: "Please select a product",
+                    choices: productNameArr
+                },
+                {
+                    type: "input",
+                    name: "quantity",
+                    message: "Enter quantity"
+                }
+            ]).then(function (answers) {
+                //console.log(answers.options)
+                database.addToInventory(answers);
+            });
+        });
     } else if (answers.options == "Add New Product") {
         inquirer.prompt([
             {

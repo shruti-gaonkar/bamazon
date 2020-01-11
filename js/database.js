@@ -1,6 +1,7 @@
 require("dotenv").config();
 
 var mysql = require("mysql");
+const { table } = require('table');
 
 function Database() {
     this.connection = mysql.createConnection({
@@ -29,11 +30,8 @@ Database.prototype.getAllItems = function (returnArrFlag = false, cb) {
     this.connection.query("SELECT * FROM products", function (err, res) {
         if (err) throw err;
         if (returnArrFlag) {
-            let productNameArr = [];
-            for (var i = 0; i < res.length; i++) {
-                productNameArr.push(res[i].product_name);
-            }
-            cb(null, res);
+            cb(res);
+            return true;
         }
         console.log("Item Id | Product Name | Price");
         for (var i = 0; i < res.length; i++) {
@@ -73,9 +71,25 @@ Database.prototype.getLowInventory = function () {
     });
 }
 
-/*function addToInventory() {
+Database.prototype.addToInventory = function (data) {
+    console.log("Updating a product...\n");
+    var query = this.connection.query(
+        "UPDATE products SET ? WHERE ?",
+        [
+            {
+                quantity: data.quantity
+            },
+            {
+                product_name: data.product_name
+            }
+        ],
+        function (err, res) {
+            if (err) throw err;
+            console.log(res.affectedRows + " product inserted!\n");
+        });
 
-}*/
+    console.log(query.sql);
+}
 
 Database.prototype.addNewItem = function (data) {
     console.log("Inserting a new product...\n");
@@ -113,6 +127,10 @@ Database.prototype.addNewDepartment = function (data) {
 
 Database.prototype.getProductSales = function () {
     this.connection.query("SELECT d.*, p.product_sales, (d.over_head_costs-p.product_sales) AS total_profit FROM departments d LEFT JOIN products p ON(d.department_name=p.department_name) group by d.department_name", function (err, res) {
+        let data,
+            output;
+
+        data = [res]; /*['0A', '0B', '0C']
         if (err) throw err;
         for (var i = 0; i < res.length; i++) {
             if (i == 0) {
@@ -122,11 +140,48 @@ Database.prototype.getProductSales = function () {
         }
         console.log("-----------------------------------");
         if (res.length == 0) console.log("No products found!");
-        return true;
+        return true;*/
+
+        output = table(res);
+
+        console.log(output);
     });
 }
-/*module.exports.connect = connect;
-module.exports.getAllItems = getAllItems;
-module.exports.getLowInventory = getLowInventory;*/
+
+Database.prototype.getItem = function (data, cb) {
+    console.log("Selecting a product...\n");
+    var query = this.connection.query(
+        "SELECT * FROM products WHERE ?",
+        {
+            item_id: data.item_id
+        }, function (err, res) {
+            if (err) throw err;
+            cb(res);
+        });
+    console.log(query.sql);
+}
+
+Database.prototype.updateProduct = function (oldData, newQuantity) {
+    console.log("Updating all product quantities...\n");
+    var query = this.connection.query(
+        "UPDATE products SET ? WHERE ?",
+        [
+            {
+                quantity: (oldData[0].quantity - newQuantity)
+            },
+            {
+                item_id: oldData[0].item_id
+            }
+        ],
+        function (err, res) {
+            if (err) throw err;
+            return true;
+        }
+    );
+
+    // logs the actual query being run
+    console.log(query.sql);
+    this.connection.end();
+}
 
 module.exports = Database;
