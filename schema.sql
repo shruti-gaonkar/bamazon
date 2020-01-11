@@ -20,5 +20,5 @@ CREATE TABLE departments(
      PRIMARY KEY (department_id)
 );
 
-ALTER TABLE departments ADD COLUMN product_sales DECIMAL(4,2) AFTER over_head_costs;
+ALTER TABLE products ADD COLUMN product_sales DECIMAL(4,2) AFTER quantity;
 

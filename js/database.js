@@ -95,6 +95,36 @@ Database.prototype.addNewItem = function (data) {
     console.log(query.sql);
 }
 
+Database.prototype.addNewDepartment = function (data) {
+    console.log("Inserting a new department...\n");
+    var query = this.connection.query(
+        "INSERT INTO departments SET ?",
+        {
+            department_name: data.department_name,
+            over_head_costs: data.over_head_costs
+        },
+        function (err, res) {
+            if (err) throw err;
+            console.log(res.affectedRows + " department inserted!\n");
+        });
+
+    console.log(query.sql);
+}
+
+Database.prototype.getProductSales = function () {
+    this.connection.query("SELECT d.*, p.product_sales, (d.over_head_costs-p.product_sales) AS total_profit FROM departments d LEFT JOIN products p ON(d.department_name=p.department_name) group by d.department_name", function (err, res) {
+        if (err) throw err;
+        for (var i = 0; i < res.length; i++) {
+            if (i == 0) {
+                console.log("Item Id | Product Name | Price");
+            }
+            console.log(res[i].item_id + " | " + res[i].product_name + " | " + res[i].price);
+        }
+        console.log("-----------------------------------");
+        if (res.length == 0) console.log("No products found!");
+        return true;
+    });
+}
 /*module.exports.connect = connect;
 module.exports.getAllItems = getAllItems;
 module.exports.getLowInventory = getLowInventory;*/
