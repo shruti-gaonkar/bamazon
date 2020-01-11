@@ -77,7 +77,23 @@ Database.prototype.getLowInventory = function () {
 
 }*/
 
+Database.prototype.addNewItem = function (data) {
+    console.log("Inserting a new product...\n");
+    var query = this.connection.query(
+        "INSERT INTO products SET ?",
+        {
+            product_name: data.product_name,
+            price: data.price,
+            quantity: data.quantity,
+            department_name: data.department_name
+        },
+        function (err, res) {
+            if (err) throw err;
+            console.log(res.affectedRows + " product inserted!\n");
+        });
 
+    console.log(query.sql);
+}
 
 /*module.exports.connect = connect;
 module.exports.getAllItems = getAllItems;

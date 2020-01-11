@@ -13,4 +13,12 @@ CREATE TABLE products(
     PRIMARY KEY (item_id)
 );
 
+CREATE TABLE departments(
+	department_id INT NOT NULL auto_increment,
+    department_name VARCHAR(50) NOT NULL,
+    over_head_costs DECIMAL(4,2) NOT NULL,
+     PRIMARY KEY (department_id)
+);
+
+ALTER TABLE departments ADD COLUMN product_sales DECIMAL(4,2) AFTER over_head_costs;
 

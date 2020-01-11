@@ -39,6 +39,29 @@ inquirer.prompt([
         });*/
 
     } else if (answers.options == "Add New Product") {
-        database.addNewItem();
+        inquirer.prompt([
+            {
+                type: "input",
+                name: "product_name",
+                message: "Enter the name of the product"
+            },
+            {
+                type: "number",
+                name: "quantity",
+                message: "Enter units of the product"
+            },
+            {
+                type: "number",
+                name: "price",
+                message: "Enter cost of the product"
+            },
+            {
+                type: "input",
+                name: "department_name",
+                message: "Enter the name of the department"
+            }
+        ]).then(function (ans) {
+            database.addNewItem(ans);
+        });
     }
 });
