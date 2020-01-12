@@ -22,8 +22,10 @@ An Amazon-like storefront which allows a customer to place an order, a store man
         * The first ask them the ID of the product they would like to buy.
         * The second message ask how many units of the product they would like to buy.
 
+        First order by customer - Ordering t-shirts
         ![Customer Order](assets/screenshots/bamazonCustomerOrder.png)
-        ![Customer DB Before and After Order](assets/screenshots/bamazonCustomerBeforeAfterOrder.png)  
+        ![Customer DB Before and After Order](assets/screenshots/bamazonCustomerBeforeAfterOrder.png) 
+
 
     * Once the customer has placed the order, the application checks if the store has enough of the product to meet the customer's request.
 
@@ -34,6 +36,9 @@ An Amazon-like storefront which allows a customer to place an order, a store man
     * However, if the store _does_ have enough of the product, it fulfills the customer's order.
         * The SQL database shows the remaining quantity.
         * Once the update goes through, the customer sees the total cost of their purchase.    
+
+        Second order by customer - Ordering t-shirts to show quantity and product sales updated.
+        ![Customer DB Second Order](assets/screenshots/bamazonCustomerBeforeAfterOrder.png) 
 
 3. Manager View
 
