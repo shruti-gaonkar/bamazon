@@ -32,12 +32,20 @@ Database.prototype.getAllItems = function (returnArrFlag = false, cb) {
             cb(res);
             return true;
         }
-        console.log("Item Id | Product Name | Price");
+        /*console.log("Item Id | Product Name | Price");
         for (var i = 0; i < res.length; i++) {
             console.log(res[i].item_id + " | " + res[i].product_name + " | " + res[i].price);
         }
         console.log("-----------------------------------");
-        return true;
+        return true;*/
+        let productArr = [];
+        for (var i = 0; i < res.length; i++) {
+            if (i == 0) {
+                productArr.push(["Item Id", "Product Name", "Price"]);
+            }
+            productArr.push([res[i].item_id, res[i].product_name, res[i].price]);
+        }
+        cb(productArr);
     });
 }
 
@@ -52,7 +60,8 @@ Database.prototype.getItem = function (data) {
             // Log all results of the SELECT statement
             return true;
         });
-    console.log(query.sql);
+    //console.log(query.sql);
+    this.connection.end();
 }
 
 Database.prototype.getLowInventory = function () {
@@ -68,6 +77,7 @@ Database.prototype.getLowInventory = function () {
         if (res.length == 0) console.log("No products found!");
         return true;
     });
+    this.connection.end();
 }
 
 Database.prototype.addToInventory = function (oldData, data) {
@@ -87,7 +97,8 @@ Database.prototype.addToInventory = function (oldData, data) {
             console.log(res.affectedRows + " product inserted!\n");
         });
 
-    console.log(query.sql);
+    //console.log(query.sql);
+    this.connection.end();
 }
 
 Database.prototype.addNewItem = function (data) {
@@ -105,7 +116,8 @@ Database.prototype.addNewItem = function (data) {
             console.log(res.affectedRows + " product inserted!\n");
         });
 
-    console.log(query.sql);
+    //console.log(query.sql);
+    this.connection.end();
 }
 
 Database.prototype.addNewDepartment = function (data) {
@@ -121,7 +133,8 @@ Database.prototype.addNewDepartment = function (data) {
             console.log(res.affectedRows + " department inserted!\n");
         });
 
-    console.log(query.sql);
+    //console.log(query.sql);
+    this.connection.end();
 }
 
 Database.prototype.getProductSales = function (cb) {
@@ -139,6 +152,7 @@ Database.prototype.getProductSales = function (cb) {
         return cb(productArr);
     });
     //console.log(query.sql);
+    this.connection.end();
 }
 
 Database.prototype.getItem = function (data, cb) {
@@ -151,7 +165,8 @@ Database.prototype.getItem = function (data, cb) {
             if (err) throw err;
             cb(res);
         });
-    console.log(query.sql);
+    //console.log(query.sql);
+    this.connection.end();
 }
 
 Database.prototype.updateProduct = function (oldData, newQuantity) {
@@ -174,7 +189,7 @@ Database.prototype.updateProduct = function (oldData, newQuantity) {
     );
 
     // logs the actual query being run
-    console.log(query.sql);
+    //console.log(query.sql);
     this.connection.end();
 }
 

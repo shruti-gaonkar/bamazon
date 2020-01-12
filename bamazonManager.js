@@ -1,6 +1,7 @@
 var mysql = require("mysql");
 var inquirer = require("inquirer");
 var Database = require("./js/database");
+const { table } = require('table');
 
 var database = new Database();
 
@@ -13,7 +14,14 @@ inquirer.prompt([
     }
 ]).then(function (answers) {
     if (answers.options == "View Products for Sale") {
-        database.getAllItems();
+        database.getAllItems(false, function (data) {
+            if (data.length == 0) {
+                console.log("No products found!");
+            } else {
+                output = table(data);
+                console.log(output);
+            }
+        });
     } else if (answers.options == "View Low Inventory") {
         database.getLowInventory();
     } else if (answers.options == "Add to Inventory") {
@@ -38,7 +46,6 @@ inquirer.prompt([
                     message: "Enter quantity"
                 }
             ]).then(function (answers) {
-                //console.log(answers.options)
                 let prodArr = [];
                 prodArr = answers.options.split("-");
                 database.getItem({ "item_id": prodArr[0] }, function (res) {
