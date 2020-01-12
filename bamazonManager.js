@@ -18,12 +18,19 @@ inquirer.prompt([
             if (data.length == 0) {
                 console.log("No products found!");
             } else {
-                output = table(data);
+                let output = table(data);
                 console.log(output);
             }
         });
     } else if (answers.options == "View Low Inventory") {
-        database.getLowInventory();
+        database.getLowInventory(function (data) {
+            if (data.length == 0) {
+                console.log("No products found!");
+            } else {
+                let output = table(data);
+                console.log(output);
+            }
+        });
     } else if (answers.options == "Add to Inventory") {
         database.getAllItems(true, function (itemsArr) {
             let productNameArr = [];

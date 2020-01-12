@@ -64,17 +64,25 @@ Database.prototype.getItem = function (data) {
     this.connection.end();
 }
 
-Database.prototype.getLowInventory = function () {
+Database.prototype.getLowInventory = function (cb) {
     this.connection.query("SELECT * FROM products where quantity<5", function (err, res) {
         if (err) throw err;
-        for (var i = 0; i < res.length; i++) {
+        /*for (var i = 0; i < res.length; i++) {
             if (i == 0) {
                 console.log("Item Id | Product Name | Price");
             }
             console.log(res[i].item_id + " | " + res[i].product_name + " | " + res[i].price);
         }
         console.log("-----------------------------------");
-        if (res.length == 0) console.log("No products found!");
+        if (res.length == 0) console.log("No products found!");*/
+        let productArr = [];
+        for (var i = 0; i < res.length; i++) {
+            if (i == 0) {
+                productArr.push(["Item Id", "Product Name", "Price"]);
+            }
+            productArr.push([res[i].item_id, res[i].product_name, res[i].price]);
+        }
+        cb(productArr);
         return true;
     });
     this.connection.end();
