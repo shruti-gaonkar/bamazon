@@ -160,7 +160,8 @@ Database.prototype.updateProduct = function (oldData, newQuantity) {
         "UPDATE products SET ? WHERE ?",
         [
             {
-                quantity: (oldData[0].quantity - newQuantity)
+                quantity: (oldData[0].quantity - newQuantity),
+                product_sales: (oldData[0].product_sales + (oldData[0].price * newQuantity))
             },
             {
                 item_id: oldData[0].item_id

@@ -27,7 +27,7 @@ inquirer.prompt([
             if (res[0].quantity >= answers.quantity) {
                 database.updateProduct(res, answers.quantity);
                 let total_cost = res[0].price * answers.quantity;
-                console.log(`The total cost of your purchase is $${total_cost}`);
+                console.log(`The total cost of your purchase is $${total_cost.toFixed(2)}`);
             } else {
                 console.log(`Only ${res[0].quantity} left!`);
             }
