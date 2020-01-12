@@ -23,8 +23,7 @@ An Amazon-like storefront which allows a customer to place an order, a store man
         * The second message ask how many units of the product they would like to buy.
 
         ![Customer Order](assets/screenshots/bamazonCustomerOrder.png)
-        ![Customer DB Before Order](assets/screenshots/bamazonCustomerBeforeOrder.png)
-        ![Customer DB After Order](assets/screenshots/bamazonCustomerAfterOrder.png)        
+        ![Customer DB Before and After Order](assets/screenshots/bamazonCustomerBeforeAfterOrder.png)  
 
     * Once the customer has placed the order, the application checks if the store has enough of the product to meet the customer's request.
 
