@@ -38,7 +38,7 @@ database.getAllItems(false, function (data) {
                             let total_cost = res[0].price * answers.quantity;
                             console.log(`The total cost of your purchase is $${total_cost.toFixed(2)}`);
                         } else {
-                            console.log(`Only ${res[0].quantity} left!`);
+                            console.log(`Insufficient quantity!`);
                         }
                     } else {
                         console.log("Insufficient quantity!");
