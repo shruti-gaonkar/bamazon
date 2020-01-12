@@ -49,21 +49,6 @@ Database.prototype.getAllItems = function (returnArrFlag = false, cb) {
     });
 }
 
-Database.prototype.getItem = function (data) {
-    console.log("Selecting a product...\n");
-    var query = this.connection.query(
-        "SELECT * FROM products WHERE ?",
-        {
-            item_id: data.item_id
-        }, function (err, res) {
-            if (err) throw err;
-            // Log all results of the SELECT statement
-            return true;
-        });
-    //console.log(query.sql);
-    this.connection.end();
-}
-
 Database.prototype.getLowInventory = function (cb) {
     this.connection.query("SELECT * FROM products where quantity<5", function (err, res) {
         if (err) throw err;
@@ -89,7 +74,7 @@ Database.prototype.getLowInventory = function (cb) {
 }
 
 Database.prototype.addToInventory = function (oldData, data) {
-    console.log("Updating a product...\n");
+    //console.log("Updating a product...\n");
     var query = this.connection.query(
         "UPDATE products SET ? WHERE ?",
         [
@@ -102,7 +87,7 @@ Database.prototype.addToInventory = function (oldData, data) {
         ],
         function (err, res) {
             if (err) throw err;
-            console.log(res.affectedRows + " product inserted!\n");
+            console.log("Inventory has been successfully updated!\n");
         });
 
     //console.log(query.sql);
@@ -164,7 +149,7 @@ Database.prototype.getProductSales = function (cb) {
 }
 
 Database.prototype.getItem = function (data, cb) {
-    console.log("Selecting a product...\n");
+    //console.log("Selecting a product...\n");
     var query = this.connection.query(
         "SELECT * FROM products WHERE ?",
         {
@@ -174,7 +159,6 @@ Database.prototype.getItem = function (data, cb) {
             cb(res);
         });
     //console.log(query.sql);
-    this.connection.end();
 }
 
 Database.prototype.updateProduct = function (oldData, newQuantity) {
