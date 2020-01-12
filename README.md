@@ -24,6 +24,8 @@ An Amazon-like storefront which allows a customer to place an order, a store man
 
         First order by customer - Ordering t-shirts
         ![Customer Order](assets/screenshots/bamazonCustomerOrder.png)
+
+        Product table shows quantity updated before and after order
         ![Customer DB Before and After Order](assets/screenshots/bamazonCustomerBeforeAfterOrder.png) 
 
 
@@ -38,7 +40,7 @@ An Amazon-like storefront which allows a customer to place an order, a store man
         * Once the update goes through, the customer sees the total cost of their purchase.    
 
         Second order by customer - Ordering t-shirts to show quantity and product sales updated.
-        ![Customer DB Second Order](assets/screenshots/bamazonCustomerBeforeAfterOrder.png) 
+        ![Customer DB Second Order](assets/screenshots/bamazonCustomerOrder2.png) 
 
 3. Manager View
 
