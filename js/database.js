@@ -1,7 +1,6 @@
 require("dotenv").config();
 
 var mysql = require("mysql");
-const { table } = require('table');
 
 function Database() {
     this.connection = mysql.createConnection({
@@ -71,16 +70,16 @@ Database.prototype.getLowInventory = function () {
     });
 }
 
-Database.prototype.addToInventory = function (data) {
+Database.prototype.addToInventory = function (oldData, data) {
     console.log("Updating a product...\n");
     var query = this.connection.query(
         "UPDATE products SET ? WHERE ?",
         [
             {
-                quantity: data.quantity
+                quantity: (oldData[0]['quantity'] + parseFloat(data.quantity))
             },
             {
-                product_name: data.product_name
+                item_id: oldData[0]['item_id']
             }
         ],
         function (err, res) {
@@ -125,27 +124,21 @@ Database.prototype.addNewDepartment = function (data) {
     console.log(query.sql);
 }
 
-Database.prototype.getProductSales = function () {
-    this.connection.query("SELECT d.*, p.product_sales, (d.over_head_costs-p.product_sales) AS total_profit FROM departments d LEFT JOIN products p ON(d.department_name=p.department_name) group by d.department_name", function (err, res) {
-        let data,
-            output;
+Database.prototype.getProductSales = function (cb) {
+    var query = this.connection.query("SELECT d.*, p.product_sales, (d.over_head_costs-p.product_sales) AS total_profit FROM departments d LEFT JOIN products p ON(d.department_name=p.department_name) group by d.department_name", function (err, res) {
+        let output;
 
-        data = [res]; /*['0A', '0B', '0C']
         if (err) throw err;
+        let productArr = [];
         for (var i = 0; i < res.length; i++) {
             if (i == 0) {
-                console.log("Item Id | Product Name | Price");
+                productArr.push(["Department Id", "Department Name", "Overhead Costs", "Products Sales", "Total Profit"]);
             }
-            console.log(res[i].item_id + " | " + res[i].product_name + " | " + res[i].price);
+            productArr.push([res[i].department_id, res[i].department_name, res[i].over_head_costs, res[i].product_sales, res[i].total_profit]);
         }
-        console.log("-----------------------------------");
-        if (res.length == 0) console.log("No products found!");
-        return true;*/
-
-        output = table(res);
-
-        console.log(output);
+        return cb(productArr);
     });
+    //console.log(query.sql);
 }
 
 Database.prototype.getItem = function (data, cb) {

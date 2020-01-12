@@ -21,13 +21,14 @@ inquirer.prompt([
             let productNameArr = [];
             if (itemsArr.length > 0) {
                 for (var i = 0; i < itemsArr.length; i++) {
-                    productNameArr.push(itemsArr[i].product_name);
+                    if (i == 0) { productNameArr.push('Product Id - Product Name'); }
+                    productNameArr.push(`${itemsArr[i].item_id} - ${itemsArr[i].product_name}`);
                 }
             }
             inquirer.prompt([
                 {
                     type: "list",
-                    name: "product_name",
+                    name: "options",
                     message: "Please select a product",
                     choices: productNameArr
                 },
@@ -38,7 +39,11 @@ inquirer.prompt([
                 }
             ]).then(function (answers) {
                 //console.log(answers.options)
-                database.addToInventory(answers);
+                let prodArr = [];
+                prodArr = answers.options.split("-");
+                database.getItem({ "item_id": prodArr[0] }, function (res) {
+                    database.addToInventory(res, answers);
+                });
             });
         });
     } else if (answers.options == "Add New Product") {

@@ -20,5 +20,8 @@ CREATE TABLE departments(
      PRIMARY KEY (department_id)
 );
 
-ALTER TABLE products ADD COLUMN product_sales DECIMAL(4,2) AFTER quantity;
+ALTER TABLE products ADD COLUMN product_sales DECIMAL(10,2) AFTER quantity;
+
+ALTER TABLE products ADD COLUMN product_sales DECIMAL(10,2) AFTER quantity;
+
 

@@ -1,6 +1,7 @@
 var mysql = require("mysql");
 var inquirer = require("inquirer");
 var Database = require("./js/database");
+const { table } = require('table');
 
 var database = new Database();
 
@@ -13,7 +14,14 @@ inquirer.prompt([
     }
 ]).then(function (answers) {
     if (answers.options == "View Product Sales by Department") {
-        database.getProductSales();
+        database.getProductSales(function (data) {
+            if (data.length == 0) {
+                console.log("No products found!");
+            } else {
+                output = table(data);
+                console.log(output);
+            }
+        });
     } else if (answers.options == "Create New Department") {
         inquirer.prompt([
             {
