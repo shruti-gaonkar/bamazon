@@ -22,9 +22,15 @@ An Amazon-like storefront which allows a customer to place an order, a store man
         * The first ask them the ID of the product they would like to buy.
         * The second message ask how many units of the product they would like to buy.
 
+        ![Customer Order](assets/screenshots/bamazonCustomerOrder.png)
+        ![Customer DB Before Order](assets/screenshots/bamazonCustomerBeforeOrder.png)
+        ![Customer DB After Order](assets/screenshots/bamazonCustomerAfterOrder.png)        
+
     * Once the customer has placed the order, the application checks if the store has enough of the product to meet the customer's request.
 
         * If not, the app logs a phrase like `Insufficient quantity!`, and then prevents the order from going through.
+
+        ![Customer Order Insufficient Quantity](assets/screenshots/bamazonCustomerInsufficientQuantity.png)    
 
     * However, if the store _does_ have enough of the product, it fulfills the customer's order.
         * The SQL database shows the remaining quantity.
@@ -44,13 +50,28 @@ An Amazon-like storefront which allows a customer to place an order, a store man
     
     * Add New Product
 
+    ![Manager List](assets/screenshots/bamazonManagerList.png)   
+
   * If a manager selects `View Products for Sale`, the app lists every available item: the item IDs, names, prices, and quantities.
+
+  ![Manager View Products](assets/screenshots/bamazonManagerViewProducts.png)
 
   * If a manager selects `View Low Inventory`, then it lists all items with an inventory count lower than five.
 
+  ![Manager Low Inventory](assets/screenshots/bamazonManagerViewLowInventory.png)
+
+   ![Manager DB Products](assets/screenshots/Product_mysql_table_data.png)
+
   * If a manager selects `Add to Inventory`, then it displays a prompt that lets the manager "add more" of any item currently in the store.
+![Manager Add to Inventory](assets/screenshots/bamazonManagerInventoryAdd.png)
+![Products DB Before Adding to Inventory](assets/screenshots/Product_mysql_table_data.png)
+![Manager Add to Inventory](assets/screenshots/bamazonManagerInventoryAdd-1.png)
+![Products DB After Adding to Inventory](assets/screenshots/bamazonManagerInventoryAdd-2.png)
+
 
   * If a manager selects `Add New Product`, it allows the manager to add a completely new product to the store.
+
+  ![Add New Product](assets/screenshots/bamazonManagerProductAdd.png)
 
 4. Supervisor View
 
@@ -58,8 +79,10 @@ An Amazon-like storefront which allows a customer to place an order, a store man
 
     * A Node app called `bamazonSupervisor.js` lists a set of menu options:
 
-    * View Product Sales by Department
+    * View Product Sales by Department: When a supervisor selects `View Product Sales by Department`, the app displays a summarized table in the terminal/bash window. 
+
+    ![View Product Sales](assets/screenshots/bamazonSupervisorViewSales.png)
     
     * Create New Department
 
-    * When a supervisor selects `View Product Sales by Department`, the app displays a summarized table in the terminal/bash window. 
+    ![Add New Department](assets/screenshots/bamazonSupervisorAddDept.png)
