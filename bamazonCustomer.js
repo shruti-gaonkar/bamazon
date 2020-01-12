@@ -8,13 +8,13 @@ inquirer.prompt([
     {
         type: "input",
         name: "item_id",
-        message: "Enter the ID of the product you would like to buy?"
-        /*validate: function validateInput(name) {
-            if (!name.match(/^[a-zA-Z]+$/)) {
-                return 'Only alphabets are allowed';
+        message: "Enter the ID of the product you would like to buy?",
+        validate: function validateInput(name) {
+            if (!name.match(/^\d+/)) {
+                return 'Only numbers are allowed';
             }
             return name !== '';
-        }*/
+        }
     },
     {
         type: "number",
