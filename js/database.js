@@ -162,7 +162,7 @@ Database.prototype.getItem = function (data, cb) {
 }
 
 Database.prototype.updateProduct = function (oldData, newQuantity) {
-    console.log("Updating all product quantities...\n");
+    console.log("Updating product quantity...\n");
     var query = this.connection.query(
         "UPDATE products SET ? WHERE ?",
         [
