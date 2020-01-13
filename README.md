@@ -69,12 +69,12 @@ An Amazon-like storefront which allows a customer to place an order, a store man
 
   ![Manager Low Inventory](assets/screenshots/bamazonManagerViewLowInventory.png)
 
-   ![Manager DB Products](assets/screenshots/Product_mysql_table_data.png)
 
   * If a manager selects `Add to Inventory`, then it displays a prompt that lets the manager "add more" of any item currently in the store.
 ![Manager Add to Inventory](assets/screenshots/bamazonManagerInventoryAdd.png)
-![Products DB Before Adding to Inventory](assets/screenshots/Product_mysql_table_data.png)
+
 ![Manager Add to Inventory](assets/screenshots/bamazonManagerInventoryAdd-1.png)
+
 ![Products DB After Adding to Inventory](assets/screenshots/bamazonManagerInventoryAdd-2.png)
 
 
