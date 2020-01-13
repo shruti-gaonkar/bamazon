@@ -131,7 +131,7 @@ Database.prototype.addNewDepartment = function (data) {
 }
 
 Database.prototype.getProductSales = function (cb) {
-    var query = this.connection.query("SELECT d.*, sum(p.product_sales) as sales, (sum(p.product_sales)-d.over_head_costs) AS total_profit FROM departments d LEFT JOIN products p ON(d.department_name=p.department_name) group by p.department_name order by total_profit DESC", function (err, res) {
+    var query = this.connection.query("SELECT d.*, sum(p.product_sales) as sales, (sum(p.product_sales)-d.over_head_costs) AS total_profit FROM departments d LEFT JOIN products p ON(d.department_name=p.department_name) group by p.department_name order by sales DESC", function (err, res) {
         let output;
 
         if (err) throw err;

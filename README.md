@@ -71,11 +71,11 @@ An Amazon-like storefront which allows a customer to place an order, a store man
 
 
   * If a manager selects `Add to Inventory`, then it displays a prompt that lets the manager "add more" of any item currently in the store.
-![Manager Add to Inventory](assets/screenshots/bamazonManagerInventoryAdd.png)
+    ![Manager Add to Inventory](assets/screenshots/bamazonManagerInventoryAdd.png)
 
-![Manager Add to Inventory](assets/screenshots/bamazonManagerInventoryAdd-1.png)
+    ![Manager Add to Inventory](assets/screenshots/bamazonManagerInventoryAdd-1.png)
 
-![Products DB After Adding to Inventory](assets/screenshots/bamazonManagerInventoryAdd-2.png)
+    ![Products DB After Adding to Inventory](assets/screenshots/bamazonManagerInventoryAdd-2.png)
 
 
   * If a manager selects `Add New Product`, it allows the manager to add a completely new product to the store.
@@ -84,14 +84,12 @@ An Amazon-like storefront which allows a customer to place an order, a store man
 
 4. Supervisor View
 
-    * when a customer purchases anything from the store, the price of the product multiplied by the quantity purchased is added to the product's product_sales column.
+* A Node app called `bamazonSupervisor.js` lists a set of menu options:
 
-    * A Node app called `bamazonSupervisor.js` lists a set of menu options:
+    * View Product Sales by Department: When a supervisor selects `View Product Sales by Department`, the app displays a summarized table in the terminal/bash window. It also sorts the results by the highest grossing department. 
 
-    * View Product Sales by Department: When a supervisor selects `View Product Sales by Department`, the app displays a summarized table in the terminal/bash window. 
-
-    ![View Product Sales](assets/screenshots/bamazonSupervisorViewSales.png)
+        ![View Product Sales](assets/screenshots/bamazonSupervisorViewSales.png)
     
     * Create New Department
 
-    ![Add New Department](assets/screenshots/bamazonSupervisorAddDept.png)
+        ![Add New Department](assets/screenshots/bamazonSupervisorAddDept.png)
