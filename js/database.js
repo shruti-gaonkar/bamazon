@@ -43,7 +43,7 @@ Database.prototype.getAllItems = function (returnArrFlag = false, cb) {
             if (i == 0) {
                 productArr.push(["Item Id", "Product Name", "Price"]);
             }
-            productArr.push([res[i].item_id, res[i].product_name, res[i].price]);
+            productArr.push([res[i].item_id, res[i].product_name, res[i].price.toFixed(2)]);
         }
         cb(productArr);
     });
