@@ -20,8 +20,10 @@ CREATE TABLE departments(
      PRIMARY KEY (department_id)
 );
 
+ALTER TABLE products DROP COLUMN product_sales;
 ALTER TABLE products ADD COLUMN product_sales DECIMAL(10,2) AFTER quantity;
 
-ALTER TABLE products ADD COLUMN product_sales DECIMAL(10,2) AFTER quantity;
+ALTER TABLE departments DROP COLUMN over_head_costs;
+ALTER TABLE departments ADD COLUMN over_head_costs DECIMAL(10,2) AFTER department_name;
 
 
