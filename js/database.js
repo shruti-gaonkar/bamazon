@@ -131,7 +131,7 @@ Database.prototype.addNewDepartment = function (data) {
 }
 
 Database.prototype.getProductSales = function (cb) {
-    var query = this.connection.query("SELECT d.*, p.product_sales, (d.over_head_costs-p.product_sales) AS total_profit FROM departments d LEFT JOIN products p ON(d.department_name=p.department_name) group by d.department_name", function (err, res) {
+    var query = this.connection.query("SELECT d.*, sum(p.product_sales) as sales, (sum(p.product_sales)-d.over_head_costs) AS total_profit FROM departments d LEFT JOIN products p ON(d.department_name=p.department_name) group by p.department_name order by total_profit DESC", function (err, res) {
         let output;
 
         if (err) throw err;
@@ -140,7 +140,7 @@ Database.prototype.getProductSales = function (cb) {
             if (i == 0) {
                 productArr.push(["Department Id", "Department Name", "Overhead Costs", "Products Sales", "Total Profit"]);
             }
-            productArr.push([res[i].department_id, res[i].department_name, res[i].over_head_costs, res[i].product_sales, res[i].total_profit]);
+            productArr.push([res[i].department_id, res[i].department_name, res[i].over_head_costs, res[i].sales, res[i].total_profit]);
         }
         return cb(productArr);
     });
